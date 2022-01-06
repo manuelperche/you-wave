@@ -6,7 +6,11 @@ const main = async () => {
   console.log("Balance: ", accountBalance.toString());
 
   const Token = await hre.ethers.getContractFactory("YouWave");
-  const portal = await Token.deploy();
+  const portal = await Token.deploy({
+    value: hre.ethers.utils.parseEther("0.01"),
+  });
+
+  await portal.deployed();
 
   console.log("YouWave contract address: ", portal.address);
 };
